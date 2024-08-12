@@ -107,7 +107,7 @@ contract ERC20{
     }
 
     
-    // 계정 소유자 from으로부터 허가 allow받아서,
+    // 계정 소유자 from으로부터 허가 allow를 확인한 뒤.
     // 계정 소유자가 아닌 대상이, 계정 소유자 -> to 로 transfer가 가능하게 하는 함수
     // _allowances 변수에 from으로부터 호출자 msg.sender가 이동시킬 수 있는 양이 명시됨.
     // 앞서 사용한 transferModifier를 재사용.
