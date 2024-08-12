@@ -201,9 +201,13 @@ contract ERC20{
     }
     
 
-
+    // EIP-2612와 관련
     //permit 함수.
-    // owner가 생성한 서명이 맞는지 검증 후에 approve할 수 있도록 한다.
+    // approve가 필요한 트랜잭션 수행 시 signature를 검사하여 approve 해주는 함수.
+    // ECDSA를 이용해 서명자가 계좌 owner가 맞는지 확인한다.
+    // 1. timestamp를 확인해 만료된 기존 서명 재사용을 막을 수 있다.
+    // 2. _toTypedDataHash를 이용해 서명이 해당 스마트컨트랙트와 관련있음을 명시해, 다른목적의 재사용을 막는다.
+    // 3. 변화하는 nonce를 이용해 replay Attack을 막는다.
     function permit(address owner,address spender,uint256 value,
                     uint256 deadline,uint8 v,bytes32 r,bytes32 s)public{
         // 서명의 데드라인을 확인한다.
@@ -221,7 +225,7 @@ contract ERC20{
         // 서명이 올바르다면 approve.
         _approve(owner, spender, value);
     }
-    
+
 }
 
 // test1 
